@@ -5,6 +5,16 @@
   font-family: Arial, sans-serif;
 }
 
+@keyframes branchAnimation {
+  0%, 100% {
+    opacity: 0.1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
@@ -12,20 +22,94 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f5f5f5;
+  background-color: #f0fff0;
+  position: relative;
+}
+
+.animated-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.animated-background::before,
+.animated-background::after {
+  content: '';
+  position: absolute;
+  opacity: 0.15;
+}
+
+.animated-background::before {
+  width: 2px;
+  height: 200%;
+  background: linear-gradient(180deg, transparent 0%, #00FF00 50%, transparent 100%);
+  left: 20%;
+  top: -50%;
+  animation: branchAnimation 8s ease-in-out infinite;
+}
+
+.animated-background::after {
+  width: 2px;
+  height: 200%;
+  background: linear-gradient(180deg, transparent 0%, #00FF00 50%, transparent 100%);
+  right: 20%;
+  top: -30%;
+  animation: branchAnimation 10s ease-in-out infinite 2s;
 }
 
 header {
   text-align: center;
-  padding: 20px 0;
+  padding: 30px 20px;
   margin-bottom: 30px;
-  background-color: #1a237e;
+  background: linear-gradient(135deg, #00FF00 0%, #32CD32 100%);
   color: white;
   border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 255, 0, 0.2);
+  position: relative;
+  z-index: 1;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.header-text {
+  flex: 1;
+  min-width: 200px;
+}
+
+.mascot {
+  flex-shrink: 0;
+}
+
+.mascot img {
+  width: 80px;
+  height: 80px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s ease;
+}
+
+.mascot img:hover {
+  transform: scale(1.1) rotate(5deg);
 }
 
 header h1 {
   margin-bottom: 10px;
+  font-size: 2.5em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+header h2 {
+  font-size: 1.3em;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 main {
@@ -53,8 +137,9 @@ section {
 section h3 {
   margin-bottom: 20px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #ddd;
-  color: #1a237e;
+  border-bottom: 2px solid #00FF00;
+  color: #00AA00;
+  font-weight: bold;
 }
 
 .activity-card {
@@ -67,7 +152,8 @@ section h3 {
 
 .activity-card h4 {
   margin-bottom: 10px;
-  color: #0066cc;
+  color: #00AA00;
+  font-weight: bold;
 }
 
 .activity-card p {
@@ -83,7 +169,7 @@ section h3 {
 
 .participants-section h5 {
   margin-bottom: 8px;
-  color: #1a237e;
+  color: #00AA00;
   font-size: 16px;
 }
 
@@ -150,18 +236,22 @@ section h3 {
 }
 
 button {
-  background-color: #1a237e;
-  color: white;
-  border: none;
+  background-color: #00FF00;
+  color: #000;
+  border: 2px solid #00AA00;
   padding: 10px 15px;
   font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 255, 0, 0.3);
 }
 
 button:hover {
-  background-color: #3949ab;
+  background-color: #32CD32;
+  box-shadow: 0 4px 8px rgba(0, 255, 0, 0.5);
+  transform: translateY(-2px);
 }
 
 .message {
